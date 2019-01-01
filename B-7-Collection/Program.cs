@@ -139,7 +139,6 @@ namespace Base.Lesson_5
 
         public static void DictionaryOfNeighborSearch()
         {
-            //var floorNeighbors = new List<Neighbor>();
             var floorNeighbors = new Dictionary<int, Neighbor>();
 
             Random random = new Random();
@@ -148,18 +147,8 @@ namespace Base.Lesson_5
 
             for (int i = 0; i < 50; i++)
             {
-                //Neighbor neighbor = new Neighbor(); // это если надо вводить данные вручную
-                //neighbor.FlatNumber = "1";
-                //neighbor.FullName = "fsfaa";
-                //floorNeighbors.Add(neighbor);
                 if (i + 1 == 34) continue; // номер моей квартиры
 
-                //floorNeighbors.Add(new Neighbor
-                //{
-                //    FullName = $"FullName {i + random.Next(1, 100) }",
-                //    FlatNumber = i + 1,
-                //    PhoneNumber = $"+375 29 {random.Next(0000000, 9999999)}"
-                //});
                 Neighbor neighbor = new Neighbor
                 {
                     FullName = $"FullName {i + random.Next(1, 100) }",
@@ -181,16 +170,17 @@ namespace Base.Lesson_5
                     else break;
                 }
 
-                foreach (var item in floorNeighbors)
+                if (floorNeighbors.ContainsKey(flatNumber))
                 {
-                    if (item.Key == flatNumber)
-                    {
-                        Console.WriteLine($"Имя соседа {item.Value.FullName} \nНомер телефона {item.Value.PhoneNumber} ");
-                        flag = 1;
-                        break;
-                    }
+                    Console.WriteLine($"Имя соседа {floorNeighbors[flatNumber].FullName} \nНомер телефона {floorNeighbors[flatNumber].PhoneNumber} ");
+                    flag = 1;
+                    break;
                 }
-                if (flag == 0) Console.WriteLine("Такой квартиры не существует");
+                else
+                {
+                    Console.WriteLine("Такой квартиры не существует");
+                    flag = 0;
+                }
             }
         }
 
